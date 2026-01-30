@@ -38,7 +38,7 @@ const Services: React.FC = () => {
           {/* About Text */}
           <div className="max-w-2xl mx-auto text-gray-500 font-light text-sm sm:text-base leading-relaxed mb-10 px-4">
             <span className="block text-xl sm:text-2xl text-black mb-2">
-              <span className="handwritten text-3xl sm:text-4xl inline-block transition-transform hover:scale-110 duration-300">Hoi ik ben Rik!</span>
+              <span className="handwritten text-3xl sm:text-4xl inline-block">Hoi ik ben Rik!</span>
             </span>
             <p>
               Audio technicus voor evenementen en live muziek. Door mijn achtergrond als muzikant en producer combineer ik technische kennis met inzicht in wat een goede show nodig heeft. Zo zorg ik voor een betrouwbaar en prettig klinkend resultaat, ook onder druk.
