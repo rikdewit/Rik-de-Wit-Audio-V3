@@ -158,8 +158,6 @@ const OnboardingForm: React.FC = () => {
     const mainService = data['main-service'];
     const items: string[] = [];
     
-    // Alleen relevante keys meenemen op basis van de gekozen hoofd-dienst
-    // Dit voorkomt dat velden uit een eerder geselecteerde (maar later gewijzigde) branch meekomen
     const relevantPrefixes: Record<string, string[]> = {
       'live': ['live-', 'hire-', 'event-', 'has-', 'performers', 'instrument-', 'equip-', 'loc-'],
       'studio': ['studio-'],
@@ -171,20 +169,18 @@ const OnboardingForm: React.FC = () => {
     const prefixes = relevantPrefixes[mainService] || [];
 
     Object.keys(data).forEach(key => {
-      // Sla contact-details en berichten over (deze gaan in aparte velden in de mail)
       const skipKeys = [
         'contact-name', 'contact-org', 'contact-email', 
         'contact-phone', 'contact-location', 'contact-pref', 
         'main-service', 'hire-details', 'event-details', 
         'studio-details', 'nabewerking-details', 
-        'advies-muzikant-details', 'anders-details'
+        'advies-muzikant-details', 'advies-kopen-details', 'anders-details'
       ];
 
       const isRelevant = prefixes.some(p => key.startsWith(p));
 
       if (isRelevant && !skipKeys.includes(key)) {
         const value = data[key];
-        // Formatteer labels voor betere leesbaarheid in de mail
         const label = key.replace(/-/g, ' ').replace('equip ', 'APP: ').replace('instrument ', 'INSTR: ').toUpperCase();
         
         if (typeof value === 'boolean') {
@@ -204,8 +200,18 @@ const OnboardingForm: React.FC = () => {
       const projectSummary = formatProjectSummary(formData);
       const customerEmail = formData['contact-email'];
       const customerName = formData['contact-name'];
-      const projectType = serviceMap[formData['main-service']] || formData['main-service'];
+      const mainService = formData['main-service'];
+      const projectType = serviceMap[mainService] || mainService;
       
+      // Selecteer alleen het berichtveld dat bij de actieve branch hoort
+      const messageMap: Record<string, string> = {
+        'live': formData['hire-details'] || formData['event-details'],
+        'studio': formData['studio-details'],
+        'nabewerking': formData['nabewerking-details'],
+        'advies': formData['advies-muzikant-details'] || formData['advies-kopen-details'] || formData['anders-details'],
+        'anders': formData['anders-details']
+      };
+
       const baseParams = {
         customer_name: customerName,
         customer_email: customerEmail,
@@ -215,7 +221,7 @@ const OnboardingForm: React.FC = () => {
         contact_preference: formData['contact-pref'],
         project_type: projectType,
         project_summary: projectSummary,
-        customer_message: formData['hire-details'] || formData['event-details'] || formData['studio-details'] || formData['nabewerking-details'] || formData['advies-muzikant-details'] || formData['anders-details'] || 'Geen extra toelichting.',
+        customer_message: messageMap[mainService] || 'Geen extra toelichting.',
         current_year: new Date().getFullYear()
       };
 
@@ -326,7 +332,6 @@ const OnboardingForm: React.FC = () => {
         const h = [...stepHistory]; h.pop();
         setStepHistory(h); setCurrentStep(h[h.length - 1]);
         setIsAnimating(false);
-        // Reset validatie view bij teruggaan van contact naar een eerdere stap
         if (currentStep === 'contact') setShowValidationErrors(false);
       }, 300);
     }
@@ -379,7 +384,20 @@ const OnboardingForm: React.FC = () => {
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-black leading-tight">Wat kan ik voor je <span className="italic">betekenen</span>?</h2>
             <div className="grid gap-2 mb-2 sm:mb-3">
               {[{ id: 'live', label: 'Live geluid voor een evenement' }, { id: 'studio', label: 'Studio opname' }, { id: 'nabewerking', label: 'Audio Nabewerking' }, { id: 'advies', label: 'Audio Advies' }, { id: 'anders', label: 'Anders' }].map(opt => (
-                <OptionCard key={opt.id} label={opt.label} isSelected={formData['main-service'] === opt.id} onClick={() => updateFormData('main-service', opt.id)} />
+                <OptionCard 
+                  key={opt.id} 
+                  label={opt.label} 
+                  isSelected={formData['main-service'] === opt.id} 
+                  onClick={() => {
+                    // Reset project-specifieke data als de hoofd-dienst verandert
+                    if (formData['main-service'] !== opt.id) {
+                      setFormData({
+                        'contact-pref': formData['contact-pref'],
+                        'main-service': opt.id
+                      });
+                    }
+                  }} 
+                />
               ))}
             </div>
           </div>
