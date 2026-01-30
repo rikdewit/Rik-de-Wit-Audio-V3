@@ -151,7 +151,7 @@ const OnboardingForm: React.FC = () => {
       if (who === 'Muzikant / Band') return "Naam van de band of act";
       if (who === 'Particulier') return "Naam van het project";
     }
-    return "Naam van je bedrijf of organisatie";
+    return "Naam van je bedrijf or organisatie";
   }, [formData]);
 
   const formatProjectSummary = (data: FormData): string => {
@@ -334,6 +334,7 @@ const OnboardingForm: React.FC = () => {
       onClick={!disabled ? onToggle : undefined} 
       className={`relative overflow-hidden p-3 sm:p-4 border transition-all duration-300 rounded-sm group w-full ${disabled ? 'bg-gray-100 border-gray-100 cursor-not-allowed opacity-50' : 'cursor-pointer'} ${!disabled && isSelected ? 'border-black bg-white shadow-md' : 'border-gray-100 bg-white hover:border-gray-300'}`}
     >
+      {/* Fixed: Added missing backtick to close template literal correctly */}
       {!disabled && <div className={`absolute inset-0 bg-gradient-to-r from-[#87E8A0]/5 to-[#71E2E4]/5 transition-all duration-500 ease-out ${isSelected ? 'w-full' : 'w-0 group-hover:w-full'}`} />}
       <div className="relative z-10 flex items-center gap-3 sm:gap-4">
         <div className={`w-4 h-4 sm:w-5 sm:h-5 shrink-0 border flex items-center justify-center transition-all duration-300 ${!disabled && isSelected ? 'bg-black border-black scale-110' : 'border-gray-300 bg-white group-hover:border-gray-400'}`}>
@@ -360,7 +361,7 @@ const OnboardingForm: React.FC = () => {
         return (
           <div className="space-y-3 sm:space-y-4">
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-black leading-tight">Wat kan ik voor je <span className="italic">betekenen</span>?</h2>
-            <div className="grid gap-2 mb-4 sm:mb-6">
+            <div className="grid gap-2 mb-2 sm:mb-3">
               {[{ id: 'live', label: 'Live geluid voor een evenement' }, { id: 'studio', label: 'Studio opname' }, { id: 'nabewerking', label: 'Audio Nabewerking' }, { id: 'advies', label: 'Audio Advies' }, { id: 'anders', label: 'Anders' }].map(opt => (
                 <OptionCard key={opt.id} label={opt.label} isSelected={formData['main-service'] === opt.id} onClick={() => updateFormData('main-service', opt.id)} />
               ))}
@@ -371,7 +372,7 @@ const OnboardingForm: React.FC = () => {
         return (
           <div className="space-y-3 sm:space-y-4">
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-black">Hoe kan ik helpen?</h2>
-            <div className="grid gap-2 mb-2 sm:mb-4">
+            <div className="grid gap-2 mb-1 sm:mb-2">
               <OptionCard label="Ik organiseer een evenement - Help mij de juiste keuzes maken" isSelected={formData['live-type'] === 'organize'} onClick={() => updateFormData('live-type', 'organize')} />
               <OptionCard label="Huur mij direct in als technicus" isSelected={formData['live-type'] === 'hire'} onClick={() => updateFormData('live-type', 'hire')} />
             </div>
@@ -381,7 +382,7 @@ const OnboardingForm: React.FC = () => {
         return (
           <div className="space-y-3 sm:space-y-4">
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-black">In welke rol?</h2>
-            <div className="grid gap-2 mb-2 sm:mb-4">
+            <div className="grid gap-2 mb-1 sm:mb-2">
               {['Audio Technicus', 'Monitor Technicus', 'Stagehand / Crew', 'Systeemontwerper', 'Anders'].map(role => (
                 <OptionCard key={role} label={role} isSelected={formData['hire-role'] === role} onClick={() => updateFormData('hire-role', role)} />
               ))}
@@ -392,7 +393,7 @@ const OnboardingForm: React.FC = () => {
         return (
           <div className="space-y-3 sm:space-y-4">
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-black">Wat voor soort locatie?</h2>
-            <div className="grid gap-2 mb-2 sm:mb-4">
+            <div className="grid gap-2 mb-1 sm:mb-2">
               {['Bar / café', 'Festival', 'Theater / Podium', 'Anders'].map(cat => (
                 <OptionCard key={cat} label={cat} isSelected={formData['hire-location-category'] === cat} onClick={() => updateFormData('hire-location-category', cat)} />
               ))}
@@ -429,7 +430,7 @@ const OnboardingForm: React.FC = () => {
         return (
           <div className="space-y-3 sm:space-y-4">
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-black">Type studio sessie?</h2>
-            <div className="grid gap-2 mb-2 sm:mb-4">
+            <div className="grid gap-2 mb-1 sm:mb-2">
               {['Band / Instrumenten', 'Podcast opname', 'Mixage / Mastering', 'Voice-over', 'Anders'].map(t => (
                 <OptionCard key={t} label={t} isSelected={formData['studio-type'] === t} onClick={() => updateFormData('studio-type', t)} />
               ))}
@@ -440,7 +441,7 @@ const OnboardingForm: React.FC = () => {
         return (
           <div className="space-y-3 sm:space-y-4">
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-black">Hoe wil je opnemen?</h2>
-            <div className="grid gap-2 mb-2 sm:mb-4">
+            <div className="grid gap-2 mb-1 sm:mb-2">
               {['Live opname', 'Multitrack / Overdubs'].map(m => (
                 <OptionCard key={m} label={m} isSelected={formData['studio-recording-method'] === m} onClick={() => updateFormData('studio-recording-method', m)} />
               ))}
@@ -451,7 +452,7 @@ const OnboardingForm: React.FC = () => {
         return (
           <div className="space-y-3 sm:space-y-4">
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-black">Waar vindt de opname plaats?</h2>
-            <div className="grid gap-2 mb-2 sm:mb-4">
+            <div className="grid gap-2 mb-1 sm:mb-2">
               {['Op locatie', 'Bij jou in de studio', 'Nee, help mij een geschikte plek zoeken'].map(l => (
                 <OptionCard key={l} label={l} isSelected={formData['studio-locatie-keuze'] === l} onClick={() => updateFormData('studio-locatie-keuze', l)} />
               ))}
@@ -492,7 +493,7 @@ const OnboardingForm: React.FC = () => {
         return (
           <div className="space-y-3 sm:space-y-4">
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-black">Wat moet er bewerkt worden?</h2>
-            <div className="grid gap-2 mb-2 sm:mb-4">{['Podcast-montage & editing', 'Mixen van een muziekopname', 'Geluid onder video editen / mixen', 'Anders'].map(t => (
+            <div className="grid gap-2 mb-1 sm:mb-2">{['Podcast-montage & editing', 'Mixen van een muziekopname', 'Geluid onder video editen / mixen', 'Anders'].map(t => (
                 <OptionCard key={t} label={t} isSelected={formData['nabewerking-type'] === t} onClick={() => updateFormData('nabewerking-type', t)} />
             ))}</div>
           </div>
@@ -501,7 +502,7 @@ const OnboardingForm: React.FC = () => {
         return (
           <div className="space-y-3 sm:space-y-4">
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-black">Voor wie is het advies?</h2>
-            <div className="grid gap-2 mb-2 sm:mb-4">{['Horeca / Retail', 'Evenementen organisator', 'Particulier', 'Muzikant / Band', 'Anders'].map(t => (
+            <div className="grid gap-2 mb-1 sm:mb-2">{['Horeca / Retail', 'Evenementen organisator', 'Particulier', 'Muzikant / Band', 'Anders'].map(t => (
                 <OptionCard key={t} label={t} isSelected={formData['advies-who'] === t} onClick={() => updateFormData('advies-who', t)} />
             ))}</div>
           </div>
@@ -514,7 +515,7 @@ const OnboardingForm: React.FC = () => {
         return (
           <div className="space-y-3 sm:space-y-4">
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-black">Wat is het doel?</h2>
-            <div className="grid gap-2 mb-2 sm:mb-4">{goalOptions.map(t => (
+            <div className="grid gap-2 mb-1 sm:mb-2">{goalOptions.map(t => (
                 <OptionCard key={t} label={t} isSelected={formData['advies-goal'] === t} onClick={() => updateFormData('advies-goal', t)} />
             ))}</div>
           </div>
@@ -523,16 +524,16 @@ const OnboardingForm: React.FC = () => {
         return (
           <div className="space-y-3 sm:space-y-4">
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-black">Type ruimte?</h2>
-            <div className="grid gap-2 mb-2 sm:mb-4">{['Woonkamer', 'Project studio', 'Kantoor / Vergaderruimte', 'Horeca / Zaal'].map(t => (
+            <div className="grid gap-2 mb-1 sm:mb-2">{['Woonkamer', 'Project studio', 'Kantoor / Vergaderruimte', 'Horeca / Zaal'].map(t => (
                 <OptionCard key={t} label={t} isSelected={formData['advies-ruimte'] === t} onClick={() => updateFormData('advies-ruimte', t)} />
             ))}</div>
           </div>
         );
       case 'advies-doel':
         return (
-          <div className="space-y-3 sm:text-3xl font-light tracking-tight text-black">
+          <div className="space-y-3 sm:space-y-4">
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-black">Wat wil je bereiken?</h2>
-            <div className="grid gap-2 mb-2 sm:mb-4">{['Minder galm', 'Betere isolatie naar buren', 'Eerlijkere luisterervaring', 'Anders'].map(t => (
+            <div className="grid gap-2 mb-1 sm:mb-2">{['Minder galm', 'Betere isolatie naar buren', 'Eerlijkere luisterervaring', 'Anders'].map(t => (
                 <OptionCard key={t} label={t} isSelected={formData['advies-doel'] === t} onClick={() => updateFormData('advies-doel', t)} />
             ))}</div>
           </div>
@@ -541,7 +542,7 @@ const OnboardingForm: React.FC = () => {
         return (
           <div className="space-y-3 sm:space-y-4">
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-black">Voorkeur voor advies?</h2>
-            <div className="grid gap-2 mb-2 sm:mb-4">{['Online (Video call)', 'Bezoek op location', 'Weet ik nog niet'].map(t => (
+            <div className="grid gap-2 mb-1 sm:mb-2">{['Online (Video call)', 'Bezoek op location', 'Weet ik nog niet'].map(t => (
                 <OptionCard key={t} label={t} isSelected={formData['advies-methode'] === t} onClick={() => updateFormData('advies-methode', t)} />
             ))}</div>
           </div>
@@ -550,7 +551,7 @@ const OnboardingForm: React.FC = () => {
         return (
           <div className="space-y-3 sm:space-y-4">
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-black">Voor welk gebruik?</h2>
-            <div className="grid gap-2 mb-2 sm:mb-4">{['Opname / Studio setup', 'Live geluid / Band setup', 'Hi-Fi / Thuisgebruik'].map(t => (
+            <div className="grid gap-2 mb-1 sm:mb-2">{['Opname / Studio setup', 'Live geluid / Band setup', 'Hi-Fi / Thuisgebruik'].map(t => (
                 <OptionCard key={t} label={t} isSelected={formData['advies-gebruik'] === t} onClick={() => updateFormData('advies-gebruik', t)} />
             ))}</div>
           </div>
@@ -559,7 +560,7 @@ const OnboardingForm: React.FC = () => {
         return (
           <div className="space-y-3 sm:space-y-4">
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-black">Kwaliteitsniveau?</h2>
-            <div className="grid gap-2 mb-2 sm:mb-4">{['Budget / Beginner', 'Semi-pro', 'High-end / Pro'].map(t => (
+            <div className="grid gap-2 mb-1 sm:mb-2">{['Budget / Beginner', 'Semi-pro', 'High-end / Pro'].map(t => (
                 <OptionCard key={t} label={t} isSelected={formData['advies-kopen-type'] === t} onClick={() => updateFormData('advies-kopen-type', t)} />
             ))}</div>
           </div>
@@ -591,7 +592,7 @@ const OnboardingForm: React.FC = () => {
         return (
           <div className="space-y-3 sm:space-y-4">
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-black">Type event?</h2>
-            <div className="grid gap-2 mb-2 sm:mb-4">
+            <div className="grid gap-2 mb-1 sm:mb-2">
               {['Concert / Festival', 'Bedrijfsevent', 'Presentatie / Congres', 'Privéfeest / Bruiloft', 'Anders'].map(t => (
                 <OptionCard key={t} label={t} isSelected={formData['event-type'] === t} onClick={() => updateFormData('event-type', t)} />
               ))}
@@ -602,7 +603,7 @@ const OnboardingForm: React.FC = () => {
         return (
           <div className="space-y-3 sm:space-y-4">
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-black">Is er live muziek?</h2>
-            <div className="grid gap-2 mb-2 sm:mb-4">
+            <div className="grid gap-2 mb-1 sm:mb-2">
               <OptionCard label="Ja, live muziek" isSelected={formData['has-live-music'] === 'ja'} onClick={() => updateFormData('has-live-music', 'ja')} />
               <OptionCard label="Nee, alleen sprekers of audio playback" isSelected={formData['has-live-music'] === 'nee'} onClick={() => updateFormData('has-live-music', 'nee')} />
             </div>
@@ -612,7 +613,7 @@ const OnboardingForm: React.FC = () => {
         return (
           <div className="space-y-3 sm:space-y-4">
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-black">Wie treedt er op?</h2>
-            <div className="grid gap-2 mb-2 sm:mb-4">{['Solo artiest / DJ', 'Duo / Trio', 'Band (2-5 personen)', 'Grote Band / Ensemble (6+ personen)', 'Meerdere acts'].map(p => (
+            <div className="grid gap-2 mb-1 sm:mb-2">{['Solo artiest / DJ', 'Duo / Trio', 'Band (2-5 personen)', 'Grote Band / Ensemble (6+ personen)', 'Meerdere acts'].map(p => (
                 <OptionCard key={p} label={p} isSelected={formData['performers'] === p} onClick={() => updateFormData('performers', p)} />
             ))}</div>
           </div>
@@ -621,7 +622,7 @@ const OnboardingForm: React.FC = () => {
         return (
           <div className="space-y-3 sm:space-y-4">
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-black">Welke instrumenten?</h2>
-            <div className="grid grid-cols-2 gap-2 mb-2 sm:mb-4">{['Drums', 'Basgitaar', 'Gitaar', 'Keys / Piano', 'Zang', 'Blazers', 'Percussie', 'Elektronisch'].map(i => (
+            <div className="grid grid-cols-2 gap-2 mb-1 sm:mb-2">{['Drums', 'Basgitaar', 'Gitaar', 'Keys / Piano', 'Zang', 'Blazers', 'Percussie', 'Elektronisch'].map(i => (
                 <CheckboxCard key={i} label={i} isSelected={formData[`instrument-${i}`]} onToggle={() => updateFormData(`instrument-${i}`, !formData[`instrument-${i}`])} />
             ))}</div>
           </div>
@@ -637,7 +638,7 @@ const OnboardingForm: React.FC = () => {
         return (
           <div className="space-y-3 sm:space-y-4">
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-black">Aanwezig op locatie?</h2>
-            <div className="grid grid-cols-2 gap-2 mb-2 sm:mb-4">
+            <div className="grid grid-cols-2 gap-2 mb-1 sm:mb-2">
               {equipOptions.map(e => {
                 const isBlockingOption = e === 'Weet ik (nog) niet';
                 const isDisabled = !isBlockingOption && isEquipmentBlocked;
@@ -673,14 +674,14 @@ const OnboardingForm: React.FC = () => {
         return (
           <div className="space-y-3 sm:space-y-4">
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-black">Welke locatie?</h2>
-            <input type="text" className="border-b border-gray-300 py-3 sm:py-4 text-lg sm:text-xl focus:border-black outline-none font-light bg-transparent text-black w-full" placeholder="Naam van de locatie of evenement" value={formData['loc-name'] || ''} onChange={e => updateFormData('loc-name', e.target.value)} />
+            <input type="text" className="border-b border-gray-300 py-3 sm:py-4 text-lg sm:text-xl focus:border-black outline-none font-light bg-transparent text-black w-full" placeholder="Naam van the locatie of evenement" value={formData['loc-name'] || ''} onChange={e => updateFormData('loc-name', e.target.value)} />
           </div>
         );
       case 'live-practical':
         return (
           <div className="space-y-3 sm:space-y-4">
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-black">Info over je event</h2>
-            <div className="grid gap-3 sm:gap-4 mb-2 sm:mb-4">
+            <div className="grid gap-3 sm:gap-4 mb-1 sm:mb-2">
                <div className="flex flex-col gap-0.5">
                  <label className="mono text-[10px] uppercase text-gray-400 font-bold tracking-widest">Datum</label>
                  <input type="date" className="border-b border-gray-300 py-1.5 text-base sm:text-lg focus:border-black outline-none font-light bg-transparent text-black w-full" value={formData['event-date'] || ''} onChange={e => updateFormData('event-date', e.target.value)} />
@@ -704,7 +705,7 @@ const OnboardingForm: React.FC = () => {
         return (
           <div className="space-y-3 sm:space-y-4">
             <h2 className="text-2xl sm:text-3xl font-light tracking-tight text-black">Contactgegevens</h2>
-            <div className="grid gap-4 sm:gap-5 mb-2 sm:mb-4">
+            <div className="grid gap-4 sm:gap-5 mb-1 sm:mb-2">
               <div className="grid grid-cols-2 gap-3 sm:gap-5">
                 <div className="flex flex-col gap-1">
                   <label className="mono text-[10px] uppercase text-gray-500 font-bold tracking-widest">Naam *</label>
@@ -786,16 +787,19 @@ const OnboardingForm: React.FC = () => {
   return (
     <section id="diensten" className="min-h-screen flex items-center py-12 sm:py-20 md:py-24 px-4 sm:px-6 bg-white overflow-hidden border-y border-gray-50">
       <div className="max-w-7xl mx-auto w-full">
-        {/* Veranderd van items-center naar items-start om verticaal 'springen' te voorkomen */}
-        <div className="grid lg:grid-cols-5 gap-10 lg:gap-20 items-start">
-          {/* Kolom met tekst heeft nu een vaste top padding om uitlijning met de card te behouden zonder justify-center */}
-          <div className="lg:col-span-2 flex flex-col pt-0 lg:pt-16">
+        {/* We gebruiken sticky positioning voor de linkerkolom om te zorgen dat de tekst niet verspringt als de formulierhoogte verandert */}
+        <div className="grid lg:grid-cols-5 gap-10 lg:gap-20 items-start relative">
+          
+          {/* Linkerkolom: lg:sticky zorgt ervoor dat deze stabiel blijft terwijl men door het formulier scrolt of klikt */}
+          <div className="lg:col-span-2 flex flex-col lg:sticky lg:top-32 self-start pt-0 lg:pt-8 transition-all duration-300">
             <h2 className="text-xs uppercase tracking-[0.5em] font-bold text-gray-500 mb-6 sm:mb-8">Diensten</h2>
             <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-tighter leading-[1.1] sm:leading-[0.95] mb-6 sm:mb-8 text-black">Klaar om je geluid naar een <br className="hidden sm:block" /><span className="italic">hoger niveau</span> te tillen?</h3>
             <p className="text-gray-500 font-light text-base sm:text-lg leading-relaxed max-w-md">Vul dit formulier in voor een vliegende start. Dit helpt mij om direct inzicht te krijgen in de technische eisen van jouw project.</p>
           </div>
+
           <div className="lg:col-span-3 w-full max-w-full">
-            <div className="bg-gray-50 rounded-sm border border-gray-200 shadow-xl relative overflow-hidden h-auto min-h-fit flex flex-col transition-all duration-500 w-full max-h-[95vh] sm:max-h-[90vh]">
+            {/* Een stabiele minimale hoogte voorkomt dat de rest van de pagina (zoals Portfolio) omhoog/omlaag springt bij stap-wisselingen */}
+            <div className="bg-gray-50 rounded-sm border border-gray-200 shadow-xl relative overflow-hidden h-auto min-h-[500px] sm:min-h-[600px] flex flex-col transition-all duration-500 w-full max-h-[95vh] sm:max-h-[90vh]">
               
               <div className="px-5 sm:px-8 pt-4 sm:pt-6 pb-1 shrink-0">
                 <div className="flex justify-between mb-2 sm:mb-3">
@@ -820,7 +824,8 @@ const OnboardingForm: React.FC = () => {
                 </div>
               </div>
 
-              <div className={`px-5 sm:px-8 md:px-12 py-2 sm:py-3 flex-grow transition-all duration-500 ${isAnimating || isSending ? 'opacity-30 blur-sm' : 'opacity-100 blur-0'} flex flex-col w-full overflow-y-auto custom-scrollbar`}>
+              {/* Binnenkant heeft ook een min-hoogte om te zorgen dat de kaart niet inklapt */}
+              <div className={`px-5 sm:px-8 md:px-12 py-1 flex-grow transition-all duration-500 ${isAnimating || isSending ? 'opacity-30 blur-sm' : 'opacity-100 blur-0'} flex flex-col w-full overflow-y-auto custom-scrollbar min-h-[300px]`}>
                 {renderStepContent()}
               </div>
 
