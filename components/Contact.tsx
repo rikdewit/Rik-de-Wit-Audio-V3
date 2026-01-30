@@ -50,7 +50,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div className="flex flex-col">
                     <span className="text-sm font-bold tracking-[0.2em] uppercase text-white/40 group-hover:text-white transition-colors">Instagram</span>
-                    <span className="text-lg font-light text-gray-400">@rikdewit.audio</span>
+                    <span className="text-lg font-light text-gray-400 group-hover:text-white">@rikdewit.audio</span>
                 </div>
               </a>
             </div>
