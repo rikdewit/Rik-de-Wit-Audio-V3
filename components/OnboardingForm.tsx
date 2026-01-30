@@ -155,9 +155,23 @@ const OnboardingForm: React.FC = () => {
   }, [formData]);
 
   const formatProjectSummary = (data: FormData): string => {
+    const mainService = data['main-service'];
     const items: string[] = [];
     
+    // Alleen relevante keys meenemen op basis van de gekozen hoofd-dienst
+    // Dit voorkomt dat velden uit een eerder geselecteerde (maar later gewijzigde) branch meekomen
+    const relevantPrefixes: Record<string, string[]> = {
+      'live': ['live-', 'hire-', 'event-', 'has-', 'performers', 'instrument-', 'equip-', 'loc-'],
+      'studio': ['studio-'],
+      'nabewerking': ['nabewerking-'],
+      'advies': ['advies-'],
+      'anders': ['anders-']
+    };
+
+    const prefixes = relevantPrefixes[mainService] || [];
+
     Object.keys(data).forEach(key => {
+      // Sla contact-details en berichten over (deze gaan in aparte velden in de mail)
       const skipKeys = [
         'contact-name', 'contact-org', 'contact-email', 
         'contact-phone', 'contact-location', 'contact-pref', 
@@ -166,8 +180,11 @@ const OnboardingForm: React.FC = () => {
         'advies-muzikant-details', 'anders-details'
       ];
 
-      if (!skipKeys.includes(key)) {
+      const isRelevant = prefixes.some(p => key.startsWith(p));
+
+      if (isRelevant && !skipKeys.includes(key)) {
         const value = data[key];
+        // Formatteer labels voor betere leesbaarheid in de mail
         const label = key.replace(/-/g, ' ').replace('equip ', 'APP: ').replace('instrument ', 'INSTR: ').toUpperCase();
         
         if (typeof value === 'boolean') {
@@ -334,7 +351,6 @@ const OnboardingForm: React.FC = () => {
       onClick={!disabled ? onToggle : undefined} 
       className={`relative overflow-hidden p-3 sm:p-4 border transition-all duration-300 rounded-sm group w-full ${disabled ? 'bg-gray-100 border-gray-100 cursor-not-allowed opacity-50' : 'cursor-pointer'} ${!disabled && isSelected ? 'border-black bg-white shadow-md' : 'border-gray-100 bg-white hover:border-gray-300'}`}
     >
-      {/* Fixed: Added missing backtick to close template literal correctly */}
       {!disabled && <div className={`absolute inset-0 bg-gradient-to-r from-[#87E8A0]/5 to-[#71E2E4]/5 transition-all duration-500 ease-out ${isSelected ? 'w-full' : 'w-0 group-hover:w-full'}`} />}
       <div className="relative z-10 flex items-center gap-3 sm:gap-4">
         <div className={`w-4 h-4 sm:w-5 sm:h-5 shrink-0 border flex items-center justify-center transition-all duration-300 ${!disabled && isSelected ? 'bg-black border-black scale-110' : 'border-gray-300 bg-white group-hover:border-gray-400'}`}>
@@ -787,10 +803,8 @@ const OnboardingForm: React.FC = () => {
   return (
     <section id="diensten" className="min-h-screen flex items-center py-12 sm:py-20 md:py-24 px-4 sm:px-6 bg-white overflow-hidden border-y border-gray-50">
       <div className="max-w-7xl mx-auto w-full">
-        {/* We gebruiken sticky positioning voor de linkerkolom om te zorgen dat de tekst niet verspringt als de formulierhoogte verandert */}
         <div className="grid lg:grid-cols-5 gap-10 lg:gap-20 items-start relative">
           
-          {/* Linkerkolom: lg:sticky zorgt ervoor dat deze stabiel blijft terwijl men door het formulier scrolt of klikt */}
           <div className="lg:col-span-2 flex flex-col lg:sticky lg:top-32 self-start pt-0 lg:pt-8 transition-all duration-300">
             <h2 className="text-xs uppercase tracking-[0.5em] font-bold text-gray-500 mb-6 sm:mb-8">Diensten</h2>
             <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-tighter leading-[1.1] sm:leading-[0.95] mb-6 sm:mb-8 text-black">Klaar om je geluid naar een <br className="hidden sm:block" /><span className="italic">hoger niveau</span> te tillen?</h3>
@@ -798,7 +812,6 @@ const OnboardingForm: React.FC = () => {
           </div>
 
           <div className="lg:col-span-3 w-full max-w-full">
-            {/* Een stabiele minimale hoogte voorkomt dat de rest van de pagina (zoals Portfolio) omhoog/omlaag springt bij stap-wisselingen */}
             <div className="bg-gray-50 rounded-sm border border-gray-200 shadow-xl relative overflow-hidden h-auto min-h-[500px] sm:min-h-[600px] flex flex-col transition-all duration-500 w-full max-h-[95vh] sm:max-h-[90vh]">
               
               <div className="px-5 sm:px-8 pt-4 sm:pt-6 pb-1 shrink-0">
@@ -824,7 +837,6 @@ const OnboardingForm: React.FC = () => {
                 </div>
               </div>
 
-              {/* Binnenkant heeft ook een min-hoogte om te zorgen dat de kaart niet inklapt */}
               <div className={`px-5 sm:px-8 md:px-12 py-1 flex-grow transition-all duration-500 ${isAnimating || isSending ? 'opacity-30 blur-sm' : 'opacity-100 blur-0'} flex flex-col w-full overflow-y-auto custom-scrollbar min-h-[300px]`}>
                 {renderStepContent()}
               </div>

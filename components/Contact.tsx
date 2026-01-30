@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Mail, Phone, Instagram, MapPin } from 'lucide-react';
 
@@ -21,14 +22,14 @@ const Contact: React.FC = () => {
               <div className="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all duration-500">
                 <Mail size={24} strokeWidth={1.5} />
               </div>
-              <span className="text-2xl font-light text-gray-400 group-hover:text-white transition-colors">audio@rikdewit.nl</span>
+              <span className="text-2xl font-light text-gray-400 group-hover:text-white transition-colors duration-500">audio@rikdewit.nl</span>
             </a>
             
             <a href="tel:+31637231247" className="flex items-center gap-8 group cursor-pointer">
               <div className="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all duration-500">
                 <Phone size={24} strokeWidth={1.5} />
               </div>
-              <span className="text-2xl font-light text-gray-400 group-hover:text-white transition-colors">+31 6 372 312 47</span>
+              <span className="text-2xl font-light text-gray-400 group-hover:text-white transition-colors duration-500">+31 6 372 312 47</span>
             </a>
 
             <div className="flex items-center gap-8 group cursor-default">
@@ -44,13 +45,18 @@ const Contact: React.FC = () => {
           <div className="p-16 border border-white/10 bg-white/5 backdrop-blur-md rounded-sm shadow-2xl">
             <h4 className="text-3xl font-light mb-10 mono uppercase tracking-widest">Volg mij</h4>
             <div className="flex gap-10">
-              <a href="https://www.instagram.com/rikdewit.audio" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400 transition-colors flex items-center gap-4 group">
-                <div className="p-4 border border-white/10 rounded-full group-hover:border-white/40 transition-colors">
+              <a 
+                href="https://www.instagram.com/rikdewit.audio" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="flex items-center gap-4 group cursor-pointer"
+              >
+                <div className="p-4 border border-white/10 rounded-full group-hover:border-white/40 group-hover:scale-105 transition-all duration-500 ease-out">
                   <Instagram size={40} strokeWidth={1} />
                 </div>
                 <div className="flex flex-col">
-                    <span className="text-sm font-bold tracking-[0.2em] uppercase text-white/40 group-hover:text-white transition-colors">Instagram</span>
-                    <span className="text-lg font-light text-gray-400 group-hover:text-white">@rikdewit.audio</span>
+                    <span className="text-sm font-bold tracking-[0.2em] uppercase text-white/40 group-hover:text-white transition-colors duration-500">Instagram</span>
+                    <span className="text-lg font-light text-gray-400 group-hover:text-white transition-colors duration-500">@rikdewit.audio</span>
                 </div>
               </a>
             </div>
