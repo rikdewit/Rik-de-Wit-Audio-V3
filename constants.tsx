@@ -24,7 +24,7 @@ export const LogoGraphic: React.FC<{ className?: string }> = ({ className = "" }
         <path d="M27 42H0V128.5H550.5V4H517.5V9.5H491.5V39H467V57H443V51.5H409.5V39H393.5V0H357.5V9.5H335.5V15.5H318.5V31H307.5V44H285.5L281 47H267V42H244V29H225.5V24.5H198.5V42H179V51.5H147.5V42H122.5V47H103.5V20.5H85V1.5H47V24.5H27V42Z" fill="white"/>
       </mask>
       
-      <g mask="url(#mask0_rik)">
+      <g mask="url(#mask0_rik)" style={{ filter: 'saturate(1.3)' }}>
         <defs>
           <linearGradient id="rik_gradient" x1="0" y1="0" x2="551" y2="0" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#87E8A0" />
