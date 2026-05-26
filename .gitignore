@@ -31,3 +31,7 @@ package-lock.json
 *.code-workspace
 
 .vercel
+.claude/projects/
+.claude/cache/
+.claude/settings.json
+.playwright-mcp/

@@ -12,7 +12,7 @@ const REVIEWS: Review[] = [
     authorAttribution: { displayName: 'Bart-Jan Hoogink' },
     rating: 5,
     text: {
-      text: 'Rik heeft onlangs geluid verzorgd tijdens ons optreden. Hij was lekker op tijd aanwezig om de situatie goed te bekijken en om even kennis te kunnen maken en specifieke wensen vanuit ons als band te bespreken. De organisatie verliep niet helemaal volgens afspraak, maar dat loste Rik heel professioneel op door rustig te blijven, focus op wat moest gebeuren en met ons te blijven communiceren. Het geluid richting het publiek klonk hartstikke goed. Al met al zou ik Rik zeker aanraden!',
+      text: 'Rik heeft onlangs geluid verzorgd tijdens ons optreden. Hij was lekker op tijd aanwezig om de situatie goed te bekijken en om even kennis te kunnen maken en specifieke wensen vanuit ons als band te bespreken. De organisatie vanuit het geluidsbedrijf dat hem inhuurde verliep niet helemaal volgens afspraak, maar dat loste Rik heel professioneel op door rustig te blijven, focus op wat moest gebeuren en met ons te blijven communiceren tijdens de opbouw en soundcheck. Het geluid richting het publiek klonk hartstikke goed. We regelden zelf onze in ear mix, maar ook daar dacht Rik in mee wanneer we daarin tegen issues aanliepen. Al met al zou ik Rik zeker aanraden!',
       languageCode: 'nl',
     },
     publishDate: '2026-05-26',
