@@ -37,6 +37,7 @@ body {
   background: #555;
 }
 
+
 @media (prefers-color-scheme: dark) {
   body {
     background-color: white !important;
