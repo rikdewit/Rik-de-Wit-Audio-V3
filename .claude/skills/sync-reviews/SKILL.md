@@ -57,6 +57,8 @@ Per review verzamel je:
 
 **Sla reviews met een rating van 3 of lager over.** Voeg alleen reviews toe met rating 4 of 5.
 
+**Kopieer de tekst van elke review exact zoals die op Google staat.** Wijzig geen woorden, interpunctie, hoofdletters of zinsvolgorde. Als een review een "Meer weergeven" knop heeft, klik die dan eerst aan zodat de volledige tekst zichtbaar is voordat je kopieert.
+
 ### 4. Vergelijk met bestaande reviews
 
 Lees `components/Reviews.tsx`. De bestaande reviews staan in de `REVIEWS` const array.
