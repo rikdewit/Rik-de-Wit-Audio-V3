@@ -79,7 +79,7 @@ const REVIEWS: Review[] = [
 
 export default function Reviews() {
   return (
-    <section className="py-24 px-6 bg-white overflow-hidden">
+    <section className="py-24 px-6 bg-[#fafafa] overflow-hidden">
       <div className="max-w-7xl mx-auto w-full mb-16">
         <h2 className="text-sm uppercase tracking-[0.4em] font-bold text-gray-400 mb-4">Ervaringen</h2>
         <h3 className="text-5xl font-light tracking-tight leading-none">Wat klanten zeggen</h3>
